@@ -192,7 +192,7 @@ class Drink(db.Model):
 EXTENSIONS = ["png", "gif", "jpg", "jpeg"]
 BASE_DIR = os.getcwd()
 S3_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME")
-S3_BASE_URL = f"https://{S3_BUCKET_NAME}.S3.us-east-2.amazonaws.com"
+S3_BASE_URL = f"https://{S3_BUCKET_NAME}.s3.us-east-2.amazonaws.com"
 
 class Post(db.Model):
   """
@@ -302,7 +302,7 @@ class Asset(db.Model):
           s3_client.upload_file(image_temploc, S3_BUCKET_NAME, img_filename)
           #make s3 image url public
           s3_resource = boto3.resource("s3")
-          object_acl = s3_resource.Objectcl(S3_BUCKET_NAME, img_filename)
+          object_acl = s3_resource.ObjectAcl(S3_BUCKET_NAME, img_filename)
           object_acl.put(ACL ="public-read")
           #remove image from server
           os.remove(image_temploc)
